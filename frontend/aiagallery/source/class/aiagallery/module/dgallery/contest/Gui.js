@@ -72,7 +72,7 @@ qx.Class.define("aiagallery.module.dgallery.contest.Gui",
       colLayout3 = new qx.ui.container.Composite(new qx.ui.layout.HBox(20));
 
       // Layout to hold intro and canvas
-      introCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox(20));
+      introCanvas =  new qx.ui.container.Composite(new qx.ui.layout.VBox(20));
       scrollContainer.add(introCanvas, { flex : 1 });  
 
       // Layout for first place columns
