@@ -202,12 +202,12 @@ new aiagallery.main.Module(
     aiagallery.main.Constant.PageName.Featuredapps, 
     aiagallery.module.dgallery.featuredapps.Featuredapps);
 
-//new aiagallery.main.Module(
-//  "Contest Winners",
-//  "aiagallery/module/system-search.png",
-//  "Contest",
-//  aiagallery.main.Constant.PageName.Contest,
-//  aiagallery.module.dgallery.contest.Contest);
+new aiagallery.main.Module(
+  "Contest Winners",
+  "aiagallery/module/system-search.png",
+  "Contest",
+  aiagallery.main.Constant.PageName.Contest,
+  aiagallery.module.dgallery.contest.Contest);
 
 //new aiagallery.main.Module(
 //    "Featured Apps", 
