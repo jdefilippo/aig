@@ -148,14 +148,60 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 
 
 // FIXME
-	// ADD STUFF HERE!
+// ADD STUFF HERE!
+      // Featured Apps section
+
+
+      var hbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
+
+      var featuredAppsLayout = new qx.ui.layout.VBox();
+      featuredAppsLayout.set(
+        {
+          alignX : "center"
+        });
+      var featuredApps = new qx.ui.container.Composite(featuredAppsLayout);
+      featuredApps.set(
+        {
+          width     : 700,
+          decorator : "home-page-ribbon",
+          padding   : 20
+        });
+
+      // Featured Apps heading
+      var featuredAppsHeader = new qx.ui.basic.Label();
+      featuredAppsHeader.set(
+        {
+          value : "Featured Apps",
+          font  : font,
+          decorator : "home-page-header"
+        });
+      featuredApps.add(featuredAppsHeader);
+      
+      // Create the container in which the apps will be placed
+      this.featuredAppsContainer =
+        new qx.ui.container.Composite(new qx.ui.layout.HBox());
+      this.featuredAppsContainer.set(
+          {
+            height : 420
+          });
+      featuredApps.add(this.featuredAppsContainer);
+      
+      // add Featured Apps section to the top hbox
+      hbox.add(featuredApps);
+
+
+
+
+
+
+
+
 
 
 	main_container.add(first_entry);
 	main_container.add(second_entry); 
 	main_container.add(third_entry);
-	
-	//main_container.add(hbox);
+	main_container.add(hbox);
 	scrollContainer.add(main_container, {flex: 1});
     },
 
