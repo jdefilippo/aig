@@ -188,19 +188,20 @@ new aiagallery.main.Module(
   aiagallery.main.Constant.PageName.Home,
   aiagallery.module.dgallery.home.Home);
 
+
+//new aiagallery.main.Module(
+//    "Contest Winners", 
+//    "aiagallery/module/system-search.png", 
+//    "Contest", 
+//    aiagallery.main.Constant.PageName.Contest, 
+//    aiagallery.module.dgallery.contest.Contest);
+
 new aiagallery.main.Module(
   "Find Apps",
   "aiagallery/module/system-search.png",
   "Find Apps",
   aiagallery.main.Constant.PageName.FindApps,
   aiagallery.module.dgallery.findapps.FindApps);
-
-new aiagallery.main.Module(
-    "Featured Apps", 
-    "aiagallery/module/system-search.png", 
-    "Featured Apps", 
-    aiagallery.main.Constant.PageName.Featuredapps, 
-    aiagallery.module.dgallery.featuredapps.Featuredapps);
 
 //new aiagallery.main.Module(
 //  "Contest Winners",
@@ -209,12 +210,19 @@ new aiagallery.main.Module(
 //  aiagallery.main.Constant.PageName.Contest,
 //  aiagallery.module.dgallery.contest.Contest);
 
-//new aiagallery.main.Module(
-//    "Featured Apps", 
-//    "aiagallery/module/system-search.png", 
-//    "Featured Apps", 
-//    aiagallery.main.Constant.PageName.Featuredapps, 
-//   aiagallery.module.dgallery.featuredapps.Featuredapps); 
+new aiagallery.main.Module(
+    "Featured Apps", 
+    "aiagallery/module/system-search.png", 
+    "Featured Apps", 
+    aiagallery.main.Constant.PageName.Featuredapps, 
+    aiagallery.module.dgallery.featuredapps.Featuredapps); 
+
+new aiagallery.main.Module(
+    "Contest Winners", 
+    "aiagallery/module/system-search.png", 
+    "Contest", 
+    aiagallery.main.Constant.PageName.Contest, 
+    aiagallery.module.dgallery.contest.Contest);
 
 if (qx.core.Environment.get("qx.debug"))
 {

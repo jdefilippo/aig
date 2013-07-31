@@ -143,9 +143,19 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
         third_entry.add(third, {flex: 1});
 	third_entry.add(fourth, {flex: 1});
 
+
+
+
+
+// FIXME
+	// ADD STUFF HERE!
+
+
 	main_container.add(first_entry);
 	main_container.add(second_entry); 
 	main_container.add(third_entry);
+	
+	//main_container.add(hbox);
 	scrollContainer.add(main_container, {flex: 1});
     },
 
@@ -184,6 +194,50 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       // Dispatch to the appropriate handler, depending on the request type
       switch(requestType)
       {
+      case "getHomeRibbonData": 
+        // Retrieve the app lists
+        var featuredAppsList = response.data.result.Featured;
+        
+        this.featuredAppsContainer.removeAll();
+        
+
+        // Fill the featured apps ribbon with data
+        for (i = 0; i < featuredAppsList.length; i++)
+        {
+          // If this isn't the first one, ...
+          if (i > 0)
+          {
+            // ... then add a spacer between the previous one and this one
+            this.featuredAppsContainer.add(new qx.ui.core.Spacer(10));
+          }
+
+          // Add the thumbnail for this app
+          var appFeatured = featuredAppsList[i];
+          var appThumbFeatured = 
+            new aiagallery.widget.SearchResult("featured", appFeatured);
+          this.featuredAppsContainer.add(appThumbFeatured);
+
+          // Associate the app data with the UI widget so it can be passed
+          // in the click event callback
+          appThumbFeatured.setUserData("App Data", appFeatured);
+          
+          // Fire an event specific to this application, sans a friendly name.
+          appThumbFeatured.addListener(
+            "click", 
+            function(e)
+            {
+              fsm.fireImmediateEvent(
+                "homeRibbonAppClick", 
+                this, 
+                e.getCurrentTarget().getUserData("App Data"));
+            });
+        }
+
+        // Hide the featured apps ribbon if it's empty
+        this.featuredAppsContainer.setVisibility(
+          featuredAppsList.length == 0 ? "excluded" : "visible");
+       
+        break;
       default:
         throw new Error("Unexpected request type: " + requestType);
       }

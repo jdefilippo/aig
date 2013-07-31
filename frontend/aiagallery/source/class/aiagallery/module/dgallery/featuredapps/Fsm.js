@@ -1,6 +1,7 @@
 /**
  * Copyright (c) 2013 Derrell Lipman
  *                    Paul Geromini
+ *                    James DeFilippo
  * 
  * License:
  *   LGPL: http://www.gnu.org/licenses/lgpl.html 
@@ -72,12 +73,21 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Fsm",
             "queryBtn" : "Transition_Idle_to_AwaitRpcResult_via_query"
             
           },
-          
+	  
+	  // FIXME
+          // Click on a featured app
+          "homeRibbonAppClick" : 
+            "Transition_Idle_to_Idle_via_homeRibbonAppClick",
+      
           // When we get an appear event, retrieve the category tags list. We
           // only want to do it the first time, though, so we use a predicate
           // to determine if it's necessary.
+	  // FIXME
           "appear"    :
           {
+	   // FIXME
+	      "main.canvas" : 
+	         "Transition_Idle_to_AwaitRpcResult_via_appear"
             //"main.canvas" : 
               //qx.util.fsm.FiniteStateMachine.EventHandling.PREDICATE
           },
@@ -131,7 +141,30 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Fsm",
         "ontransition" : function(fsm, event)
         {
          // If we wanted to do something as the page appeared, it would go here.
+	   // Issue the remote procedure call to execute the query.
+          // In essence get the front page ribbons.
+          // Also grab the MOTD
+          var request =
+              this.callRpc(fsm,
+                         "aiagallery.features",
+                           "getHomeRibbonData", 
+                           [ 
+                             // requested fields
+                             {
+                               uid          : "uid",
+                               owner        : "owner",
+                               image1       : "image1",
+                               title        : "title",
+                               displayName  : "displayName"
+                             }
+                           ]);
+
+          // When we get the result, we'll need to know what type of request
+          // we made.
+          request.setUserData("requestType", "getHomeRibbonData");
+          
         }
+	
       });
 
       state.addTransition(trans);
@@ -207,6 +240,56 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Fsm",
       state.addTransition(trans);
 
       
+
+
+
+
+
+       /*
+       * Transition: Idle to Idle
+       *
+       * Cause: A featured item is selected
+       *
+       *  Action:
+       *  Create (if necessary) and switch to an application-specific tab
+       */
+      
+
+
+      trans = new qx.util.fsm.Transition(
+        "Transition_Idle_to_Idle_via_homeRibbonAppClick",
+      {
+        "nextState" : "State_Idle",
+      
+        "context" : this,
+      
+        "ontransition" : function(fsm, event)
+        {
+          // Get the event data
+          var             item = event.getData();
+
+          // Add a module for the specified app
+          aiagallery.module.dgallery.appinfo.AppInfo.addAppView(item.uid, 
+                                                               item.title);
+
+        }
+      });
+      
+      state.addTransition(trans);
+      
+
+   
+
+
+
+
+
+
+
+
+
+
+
       // ------------------------------------------------------------ //
       // State: <some other state>
       // ------------------------------------------------------------ //
