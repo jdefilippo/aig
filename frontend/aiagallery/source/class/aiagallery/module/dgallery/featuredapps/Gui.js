@@ -88,7 +88,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 	main_container.add(intro_container);
 	
 
-	// SECTION III: Main body section
+/* 	// SECTION III: Main body section
 	var first_entry = new qx.ui.container.Composite();
 	var list_layout = new qx.ui.layout.HBox(20);
 	list_layout.setAlignX("center");
@@ -144,7 +144,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 	third_entry.add(fourth, {flex: 1});
 
 
-
+*/ 
 
 
 // FIXME
@@ -162,7 +162,8 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       var featuredApps = new qx.ui.container.Composite(featuredAppsLayout);
       featuredApps.set(
         {
-          width     : 700,
+          //width     : 700,
+	    width : 1200,
           decorator : "home-page-ribbon",
           padding   : 20
         });
@@ -198,9 +199,9 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 
 
 
-	main_container.add(first_entry);
-	main_container.add(second_entry); 
-	main_container.add(third_entry);
+	//main_container.add(first_entry);
+	//main_container.add(second_entry); 
+	//main_container.add(third_entry);
 	main_container.add(hbox);
 	scrollContainer.add(main_container, {flex: 1});
     },

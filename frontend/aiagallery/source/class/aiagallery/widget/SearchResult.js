@@ -62,7 +62,10 @@ qx.Class.define("aiagallery.widget.SearchResult",
           
           spacer       : { row : 0, column : 100 },
           likeIt       : { row : 0, column : 101 },
-          flagIt       : { row : 0, column : 102 }
+          flagIt       : { row : 0, column : 102 },
+          // FIXME
+          // Is this even necessary
+          review       : { row : 0, column : 103 }
         };
       break;
       
@@ -92,9 +95,12 @@ qx.Class.define("aiagallery.widget.SearchResult",
           spacer       : { row : 1, column : 0 },
           title        : { row : 2, column : 0 },
           displayName  : { row : 3, column : 0 },
-
+	  // FIXME
+          //description : { row : 4, column: 0 },
+          review       : {row : 4, column : 0 },
           numLikes     : { row : 0, column : 100 },
           numDownloads : { row : 0, column : 101 },
+          //numDownloads : { row : 4, column : 0 },
           numViewed    : { row : 0, column : 102 },
           numComments  : { row : 0, column : 103 },
           description  : { row : 0, column : 104 },
@@ -121,12 +127,15 @@ qx.Class.define("aiagallery.widget.SearchResult",
           numViewed    : { row : 3, column : 4 },
           numComments  : { row : 3, column : 5 },
           
+	    
           description  : { row : 0, column : 100 },
           creationTime : { row : 0, column : 101 },
           uploadTime   : { row : 0, column : 102 },
           spacer       : { row : 0, column : 103 },
           likeIt       : { row : 0, column : 104 },
-          flagIt       : { row : 0, column : 105 }
+          flagIt       : { row : 0, column : 105 },
+          review       : { row : 0, column : 106 }  
+	    
         };
       break;
 
@@ -157,7 +166,8 @@ qx.Class.define("aiagallery.widget.SearchResult",
           spacer       : { row : 3, column : 5 },
           uploadTime   : { row : 3, column : 6 },
           likeIt       : { row : 4, column : 4 },
-          flagIt       : { row : 4, column : 6 }
+          flagIt       : { row : 4, column : 6 },
+          review       : { row : 0, column: 100 }
         };
       
       // Only instantiate these controls when needed
@@ -187,6 +197,7 @@ qx.Class.define("aiagallery.widget.SearchResult",
     this.getChildControl("numComments");
     this.getChildControl("displayName");
     this.getChildControl("description");
+    this.getChildControl("review");
     this.getChildControl("creationTime");
     this.getChildControl("uploadTime");
     this.getChildControl("spacer");
@@ -226,6 +237,9 @@ qx.Class.define("aiagallery.widget.SearchResult",
     
     /** Fired when the description property is changed */
     "changeDescription" : "qx.event.type.Data",
+
+    // FIXME 
+    "changeReview" : "qx.event.type.Data", 
     
     /** Fired when the creationTime property is changed */
     "changeCreationTime" : "qx.event.type.Data",
@@ -312,6 +326,16 @@ qx.Class.define("aiagallery.widget.SearchResult",
       check    : "String",
       event    : "changeDescription"
     },
+
+    review: 
+      {
+	  apply : "_applyReview", 
+	  nullable : true, 
+	  check : "String", 
+	  event : "changeReview"
+
+      },
+
     
     creationTime :
     {
@@ -479,7 +503,9 @@ qx.Class.define("aiagallery.widget.SearchResult",
 
         case "homeRibbon":
         case "featured":
-          size = 0;
+	    // FIXME
+	    // CHANGE THIS UP originally, size = 0;
+            size = 0;
           break;
 
         case "byAuthor":
@@ -635,6 +661,44 @@ qx.Class.define("aiagallery.widget.SearchResult",
           });
         this._add(control, this.gridConfig.description);
         break;
+
+
+// FIXME 
+      case "review":
+
+        //control = new qx.ui.form.TextArea();
+        control = new qx.ui.basic.Label();
+        switch(this.format)
+        {
+        case "homeRibbon":
+        case "featured":
+          size = 300;
+          break;
+
+        case "searchResults":
+        case "byAuthor":
+          size = 0;
+          break;
+
+        case "appInfo":
+          size = 0;
+          break;
+        }
+        control.set(
+          {
+            appearance : "widget",
+	    // FIXME
+            //readOnly   : true,
+            wrap       : true,
+            anonymous  : true,
+            minHeight  : size,
+            maxHeight  : size
+          });
+        this._add(control, this.gridConfig.review);
+        break;
+
+
+
 
       case "creationTime":
         control = new qx.ui.basic.Label();
