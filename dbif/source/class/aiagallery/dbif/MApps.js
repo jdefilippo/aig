@@ -175,6 +175,8 @@ qx.Mixin.define("aiagallery.dbif.MApps",
         {
         // If it's one of the text fields...
         case "title":
+	// FIXME: Added this for review
+	case "review":
         case "description":
           // Split up the words and...
           wordsToAdd = dataObj[appDataField].match(acceptable_word) || [];
@@ -607,6 +609,8 @@ qx.Mixin.define("aiagallery.dbif.MApps",
       var             i;
       var             title;
       var             description;
+      // FIXME
+      var             review;
       var             image;
       var             previousAuthors;
       var             source;
@@ -642,6 +646,8 @@ qx.Mixin.define("aiagallery.dbif.MApps",
           "uid",
           "title",
           "description",
+	  // FIXME: You might want to add to requiredFields
+          "review",
           "image1",
           "source",
           "sourceFileName",
@@ -775,6 +781,33 @@ qx.Mixin.define("aiagallery.dbif.MApps",
                 // Replace what's in the db entry
                 appData[field] = attributes[field];
                 break;
+
+
+
+              // FIXME
+
+	      case "review":
+                // Validate the length
+                if (attributes.review.length > 
+                    aiagallery.dbif.Constants.FieldLength.Description)
+                {
+                  // The field data is too long
+                  error.setCode(3);
+                  error.setMessage("Field data too long");
+                  error.setData(
+                    {
+                      field  : "review",
+                      maxLen : aiagallery.dbif.Constants.FieldLength.Description
+                    });
+                  throw error;
+                }
+
+                // Replace what's in the db entry
+                appData[field] = attributes[field];
+                break;
+
+
+
 
               case "source":
                 // If there's no newsource member...
@@ -1179,6 +1212,8 @@ qx.Mixin.define("aiagallery.dbif.MApps",
       var             i;
       var             title;
       var             description;
+	// FIXME
+      var             review;
       var             tags;
       var             tagObj;
       var             tagData;
@@ -1195,6 +1230,8 @@ qx.Mixin.define("aiagallery.dbif.MApps",
         [
           "title",
           "description",
+	  //FIXME
+	  "review",
           "tags",
           "status"
         ];

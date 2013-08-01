@@ -51,6 +51,10 @@ qx.Class.define("aiagallery.dbif.ObjAppData",
 
         /** Description of the application */
         "description" : "String",
+	
+	// FIXME 
+	"review" : "String",
+
 
         /** New (to be processed) image #1 (data: or real URL) */
         "newimage1" : "LongString",

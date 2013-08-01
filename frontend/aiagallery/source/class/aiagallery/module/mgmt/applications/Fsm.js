@@ -394,6 +394,8 @@ qx.Class.define("aiagallery.module.mgmt.applications.Fsm",
           var             tags;
           var             statusName;
           var             status;
+	  // FIXME
+	    var review;
 
           // Retrieve the cell editor and cell info
           cellEditor = this.getUserData("cellEditor");
@@ -405,6 +407,9 @@ qx.Class.define("aiagallery.module.mgmt.applications.Fsm",
           uid = cellEditor.getUserData("uid");
           appTitle = cellEditor.getUserData("titleField").getValue();
           description = cellEditor.getUserData("descriptionField").getValue();
+	  // FIXME
+	  review = cellEditor.getUserData("reviewField").getValue();
+	    
 
           // Create the tags list out of a combination of the categories and
           // additionalTags lists.
@@ -443,6 +448,7 @@ qx.Class.define("aiagallery.module.mgmt.applications.Fsm",
             {
               title       : appTitle,
               description : description,
+		review      : review,
               tags        : tags,
               status      : status
             };

@@ -79,7 +79,9 @@ qx.Class.define("aiagallery.module.mgmt.applications.CellEditorFactory",
         this.tr("Title"),
         this.tr("Description"),
         this.tr("Categories"),
-        this.tr("Status")
+        this.tr("Status"),
+        this.tr(""), 
+        this.tr("Review")
       ].forEach(function(label)
         {
           o = new qx.ui.basic.Label(label);
@@ -339,12 +341,35 @@ qx.Class.define("aiagallery.module.mgmt.applications.CellEditorFactory",
       emailLabel.setSelectable(true);
       bottomRow.add(emailLabel);
 
+
+
+
+
+
+	// FIXME
+	// THIS WORKS!
+	// Create the editor field for the app description
+      var reviewField = new qx.ui.form.TextArea("");
+      reviewField.setMinHeight(200);
+      reviewField.setMaxHeight(200);
+      // FIXME
+      //reviewField.setValue(rowData.description);
+      cellEditor.add(reviewField, { row : 5, column : 1 });
+     
+
+
+
+
+
+
       // Save the input fields for access by getCellEditorValue() and the FSM
       cellEditor.setUserData("titleField", titleField);
       cellEditor.setUserData("descriptionField", descriptionField);
       cellEditor.setUserData("categories", categories);
       cellEditor.setUserData("additionalTags", additionalTags);
       cellEditor.setUserData("statusBox", statusBox);
+      //FIXME
+      cellEditor.setUserData("reviewField", reviewField);
       
       // Save the uid
       cellEditor.setUserData("uid", rowData.uid);

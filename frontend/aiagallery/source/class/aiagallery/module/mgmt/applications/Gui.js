@@ -156,8 +156,15 @@ qx.Class.define("aiagallery.module.mgmt.applications.Gui",
             id      : "image1",
             colSet  : { width : 30 },
             type    : "image"
-          }
-        ];
+          }, 
+	  // FIXME 
+          { 
+              heading : this.tr("Review"), 
+	      id      : "review", 
+	      colSet : { width: "*2" } 
+	  }    
+	  // 
+         ];
 
       // Define the table columns
       model.setColumns(columns.map(function(elem)
