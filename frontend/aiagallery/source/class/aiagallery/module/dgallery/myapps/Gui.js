@@ -242,9 +242,14 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       
        
 	//FIXME
-	//function setViewAppVisibility(e) 
-	//{ 
-	//    viewapp
+      /*
+
+function setViewAppVisibility(e) 
+      { 
+          viewCanvas.setVisibility((app.getValue() == true) ? "visible" : "excluded");
+      }
+*/
+      
 
       appCanvas.addListener(
         "addChildWidget",
@@ -378,25 +383,41 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 	      
 
 
-	      // Get relevant data for the app.
-	      var app_uid; 
-	      app_uid = app.getUid();
-	      var app_title; 
-	      app_title = app.getTitle();
+	    // Get relevant data for the app.
+	    var app_uid; 
+	    app_uid = app.getUid();
+	    var app_title; 
+	    app_title = app.getTitle();
 
-              // Set a label for each app.
-   	      var label = new qx.ui.form.Button("View " + app_title); 
+            // Set a label for each app.
+   	    var label = new qx.ui.form.Button("View " + app_title); 
 
 	    // Add properties to the label
 	    label.setUserData("app_uid", app_uid); 
 	    label.setUserData("app_title", app_title);
 	    this.addAppLink(label); 
 	            
-            // Add it to the scrolling canvas
-	    //var label = new qx.ui.basic.Label("Hello");
-	    //var label = new qx.ui.form.Button("My App");
-            appCanvas.add(app);
-            viewCanvas.add(label);
+            
+
+
+
+	    function setViewAppVisibility(e) 
+	    { 
+	      viewCanvas.setVisibility((app.getValue() == false) ? "visible" : "excluded");
+	    }
+
+
+	    // Add it to the scrolling canvas
+            appCanvas.add(app);     
+	    viewCanvas.add(label);
+
+
+
+
+	    app.addListener(
+            "changeValue",
+            setViewAppVisibility, 
+            this);
 
             // Leave the app in the closed state
             app.setValue(false);
