@@ -353,9 +353,30 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 
             // Set this app's data
             app.set(usefulAppData);
-            
+
+
+	      
+
+
+	      // Get relevant data for the app.
+	      var app_uid; 
+	      app_uid = app.getUid();
+	      var app_title; 
+	      app_title = app.getTitle();
+
+              // Set a label for each app.
+     	    var label = new qx.ui.form.Button("My App");
+
+	    // Add properties to the label
+	    label.setUserData("app_uid", app_uid); 
+	    label.setUserData("app_title", app_title);
+	    this.addAppLink(label); 
+	            
             // Add it to the scrolling canvas
+	    //var label = new qx.ui.basic.Label("Hello");
+	    //var label = new qx.ui.form.Button("My App");
             this.scrollCanvas.add(app);
+            this.scrollCanvas.add(label);
 
             // Leave the app in the closed state
             app.setValue(false);
@@ -421,6 +442,38 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       default:
         throw new Error("Unexpected request type: " + requestType);
       }
+    },
+
+
+
+    /** Add a link to the user profile and set the cursor to a pointer*/
+    addAppLink : function(label)
+    {
+      label.setCursor("pointer");
+
+      label.addListener(
+        "click",
+        function(e)
+        {
+          var query;
+          var app_uid;
+          var app_title;
+
+          // Prevent the default 'click' behavior
+          //e.preventDefault();
+          //e.stop();
+
+          app_uid = e.getTarget().getUserData("app_uid");
+          app_title = e.getTarget().getUserData("app_title");
+
+          // Launch app page module
+          aiagallery.module.dgallery.appinfo.AppInfo.addAppView(app_uid, app_title);
+	
+        }); 
     }
+
+
+
+
   }
 });
