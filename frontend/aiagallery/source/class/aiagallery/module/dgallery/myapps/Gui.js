@@ -61,6 +61,18 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 
       canvas.setLayout(new qx.ui.layout.VBox());
  
+
+
+
+
+
+      appCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox());
+      viewCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox()); 
+     
+
+
+
+
       // Add an Add New Apps button, left-justified
       hBox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
       o = new qx.ui.form.Button("Add New Application");
@@ -71,7 +83,8 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
           var             app = null;
           var             children;
 
-
+	  //viewCanvas.setVisibility((app.getValue() == false) ? "visible" : "excluded");
+	  viewCanvas.setVisibility("excluded");
           // Obtain the first app (if there is one) to see if it's our one and
           // only new app editor
           children = appCanvas.getChildren();
@@ -97,10 +110,11 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
           }
 
           // Scroll the app editor into view
-          this.appCanvas.addAt(app, 0);
+          appCanvas.addAt(app, 0);
 
           // Be sure it's open
           app.setValue(true);
+	  viewCanvas.setVisibility((app.getValue() == false) ? "visible" : "excluded");
         },
         this);
       hBox.add(o);
@@ -221,8 +235,6 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       o.add(this.scrollCanvas);
 
 	
-      appCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox());
-      viewCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox()); 
       this.scrollCanvas.add(appCanvas);
       this.scrollCanvas.add(viewCanvas);
 
