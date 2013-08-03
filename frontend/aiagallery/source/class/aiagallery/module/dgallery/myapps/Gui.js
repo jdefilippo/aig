@@ -66,8 +66,8 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 
 
 
-      appCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox());
-      viewCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox()); 
+      var appCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox());
+      var viewCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox()); 
      
 
 
@@ -404,7 +404,7 @@ function setViewAppVisibility(e)
 	    var app_string = "View " + app_title;
 	    
 
-	    app_font = qx.theme.manager.Font.getInstance().resolve("bold").clone();
+	    var app_font = qx.theme.manager.Font.getInstance().resolve("bold").clone();
 	    app_font.setSize(23);
 
             // Set a label for each app.

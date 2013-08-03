@@ -35,25 +35,14 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       var             canvas; 
       var             label;
       var             desc;
-      var             fsPlaceCol1;
-      var             fsPlaceCol2;
-      var             fsPlaceCol3;
-      var             secPlaceCol1;
-      var             secPlaceCol2;
-      var             secPlaceCol3;
-      var             honPlaceCol1;
-      var             honPlaceCol2;
-      var             honPlaceCol3;
       var             font; 
       var             authorFont; 
       var             introLayout;
       var             introCanvas; 
-      var             colLayout1; 
-      var             colLayout2; 
-      var             colLayout3; 
-      var             comCol1;
-      var             comCol2; 
       var             namesLayout; 
+      var             title;
+      var             image; 
+      var             description;
 
       
         // Create a large bold font
@@ -67,9 +56,9 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
         outerCanvas.add(scrollContainer, {flex: 1}); 
      
  	var main_container = new qx.ui.container.Composite();
-	main_container.setWidth(qx.bom.Viewport.getWidth());
-	main_container.setHeight(qx.bom.Viewport.getHeight());
-	var layout_manager = new qx.ui.layout.VBox(50);
+	//main_container.setWidth(qx.bom.Viewport.getWidth());
+	//main_container.setHeight(qx.bom.Viewport.getHeight());
+	var layout_manager = new qx.ui.layout.VBox();
 	main_container.setLayout(layout_manager);
 
 
@@ -88,73 +77,13 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 	main_container.add(intro_container);
 	
 
-/* 	// SECTION III: Main body section
-	var first_entry = new qx.ui.container.Composite();
-	var list_layout = new qx.ui.layout.HBox(20);
-	list_layout.setAlignX("center");
-        first_entry.setLayout(list_layout);
-        var first = new qx.ui.basic.Label();
-	first.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D916002%26label%3DPiano%20Composer>Piano Composer</a>", rich : true, width : 450, height: 160});
-	var second = new qx.ui.basic.Image("aiagallery/question_blue.png");
-        var third = new qx.ui.form.TextArea("");
-        third.set({ value: "Feeling musical? This app allows you to harness your melodic imagination to create songs of your own. Simply drag and drop piano notes to begin. Each note’s pitch and duration can be altered. This app also features multi-track playing for chordal accompaniment. The usability of this app is limited only by the user’s creativity.", wrap: true, readOnly: true, maxHeight: 70});
-	
-        first_entry.add(first, {flex: 1});
-        first_entry.add(second, {flex: 1});
-        first_entry.add(third, {flex: 1})
-	
-
-	// SECOND ENTRY 
-	var second_entry = new qx.ui.container.Composite();
-	var list_layout = new qx.ui.layout.HBox(20);
-	list_layout.setAlignX("center");
-        second_entry.setLayout(list_layout);
-        var first = new qx.ui.basic.Label();
-	first.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D894001%26label%3DCurrency%20Converter>Currency Converter</a>", rich : true, width: 450, height: 160});
-	
-	var second = new qx.ui.basic.Image("aiagallery/question_blue.png");
-        var third = new qx.ui.form.TextArea("");
-        third.set({ value: "Ever have a burning desire to know how many Japanese yen go into $2.25 American dollar? There’s an app for that. You do need to look up the exchange rate, but once you have that down, you can figure the value of of any major currency to your heart’s content.", wrap: true, readOnly: true, maxHeight: 50});
-        second_entry.add(first, {flex: 1});
-        second_entry.add(second, {flex: 1});
-        second_entry.add(third, {flex: 1})
 
 
-	// THIRD ENTRY
-	var third_entry = new qx.ui.container.Composite();
-	var list_layout = new qx.ui.layout.HBox(20);
-	list_layout.setAlignX("center");
-        third_entry.setLayout(list_layout);
-        var first = new qx.ui.basic.Label();
-	first.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D145010%26label%3DNASA%20Image%20of%20the%20Day>Nasa Image <br>ofthe Day</a>", rich : true, width: 450, height: 160});
-	var second = new qx.ui.basic.Image("aiagallery/question_blue.png");
-	
-	var third = new qx.ui.form.TextArea("");
-        third.set({ value: "The title says it all. The app gives you a daily snapshot of the universe. And if you want to share your astonishment with your friends, you can post the image to Twitter on your behalf. This is a prime example of software which links together different parts of the web to add to the user experience.", wrap: true, readOnly: true, maxHeight: 70});
-	
-	var fourth = new qx.ui.basic.Label("JOE SMOE");
-	fourth.setUserData("username", "scottfromscott");
-	this.addUserLink(fourth);
+	//var hbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
 	
 
 
-        third_entry.add(first, {flex: 1});
-        third_entry.add(second, {flex: 1});
-        third_entry.add(third, {flex: 1});
-	third_entry.add(fourth, {flex: 1});
-
-
-*/ 
-
-
-// FIXME
-// ADD STUFF HERE!
-      // Featured Apps section
-
-
-      var hbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
-
-      var featuredAppsLayout = new qx.ui.layout.VBox();
+      var featuredAppsLayout = new qx.ui.layout.VBox(40);
       featuredAppsLayout.set(
         {
           alignX : "center"
@@ -162,12 +91,136 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       var featuredApps = new qx.ui.container.Composite(featuredAppsLayout);
       featuredApps.set(
         {
-          //width     : 700,
-	    width : 1200,
+	  width     : 1325,
           decorator : "home-page-ribbon",
           padding   : 20
         });
 
+	
+	var header_font = qx.theme.manager.Font.getInstance().resolve("bold").clone();
+        header_font.setSize(20);
+
+
+
+
+
+	// First Entry for static page.
+
+
+
+	var first_entry = new qx.ui.container.Composite(new qx.ui.layout.HBox(100));
+	var first_sub_layout = new qx.ui.layout.VBox(10);
+	first_sub_layout.set(
+	    { 
+		alignX: "center" 
+	    });
+	var first_sub = new qx.ui.container.Composite(first_sub_layout);
+
+	image = new qx.ui.basic.Image("aiagallery/pianocomposer.jpg");
+	image.setScale(true);
+	image.setWidth(200);
+	image.setHeight(200);
+	title = new qx.ui.basic.Label();
+	title.setFont(header_font);
+	title.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D916002%26label%3DPiano%20Composer>Piano Composer</a>", rich : true});
+	var author = new qx.ui.basic.Label(); 
+	author.setFont(header_font);
+	author.set({value : "scottfromscott"});
+	author.setUserData("username", "scottfromscott"); 
+	this.addUserLink(author);
+
+	description = new qx.ui.basic.Label();
+	description = new qx.ui.form.TextArea().set({value: "Feeling musical? This app allows you to harness your melodic imagination to create songs of your own. Simply drag and drop piano notes to begin. Each note’s pitch and duration can be altered. This app also features multi-track playing for chordal accompaniment. The usability of this app is limited only by the user’s creativity.", readOnly: true, width: 450, height: 105});
+						  
+	first_sub.add(title);
+	first_sub.add(author);
+	first_sub.add(description);
+
+        first_entry.add(image);
+	first_entry.add(first_sub);
+
+	// Second Entry for static page.
+
+
+
+	var second_entry = new qx.ui.container.Composite(new qx.ui.layout.HBox(100));
+	var second_sub_layout = new qx.ui.layout.VBox(10);
+	second_sub_layout.set(
+	    { 
+		alignX: "center" 
+	    });
+	var second_sub = new qx.ui.container.Composite(second_sub_layout);
+
+	image = new qx.ui.basic.Image("aiagallery/currencyconverter.jpg");
+	image.setScale(true);
+	image.setWidth(200);
+	image.setHeight(200);
+	title = new qx.ui.basic.Label();
+	title.setFont(header_font);
+	title.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D894001%26label%3DCurrency%20Converter>Currency Converter</a>", rich: true});
+	var author = new qx.ui.basic.Label(); 
+	author.setFont(header_font);
+	author.set({value : "CS Mr Bragg"});
+	author.setUserData("username", "CS Mr Bragg"); 
+	this.addUserLink(author);
+	
+	description = new qx.ui.basic.Label();
+	description = new qx.ui.form.TextArea().set({value: "Ever have a burning desire to know how many Japanese yen go into $2.25 American dollar? There’s an app for that. You do need to look up the exchange rate, but once you have that down, you can figure the value of of any major currency to your heart’s content.", readOnly: true, width: 450, height: 85});
+						  
+	second_sub.add(title);
+	second_sub.add(author);
+	second_sub.add(description);
+
+        second_entry.add(image);
+	second_entry.add(second_sub);
+
+	
+	// Third Entry for static page.
+	
+
+
+	var third_entry = new qx.ui.container.Composite(new qx.ui.layout.HBox(100));
+	var third_sub_layout = new qx.ui.layout.VBox(10);
+	third_sub_layout.set(
+	    { 
+		alignX: "center" 
+	    });
+	var third_sub = new qx.ui.container.Composite(third_sub_layout);
+
+	image = new qx.ui.basic.Image("aiagallery/nasaimgoftheday.jpg");
+	image.setScale(true);
+	image.setWidth(200);
+	image.setHeight(200);
+	title = new qx.ui.basic.Label();
+	title.setFont(header_font);
+	title.set({value : "<a href=http://gallery.appinventor.mit.edu/#page%3DApp%26uid%3D145010%26label%3DNASA%20Image%20of%20the%20Day>Nasa Image of the Day</a>", rich: true});
+	var author = new qx.ui.basic.Label(); 
+	author.setFont(header_font);
+	author.set({value : "AABlakely"});
+	author.setUserData("username", "AABlakely"); 
+	this.addUserLink(author);
+
+
+	description = new qx.ui.basic.Label();
+	description = new qx.ui.form.TextArea().set({value: "Ever have a burning desire to know how many Japanese yen go into $2.25 American dollar? There’s an app for that. You do need to look up the exchange rate, but once you have that down, you can figure the value of of any major currency to your heart’s content.", readOnly: true, width: 450, height: 85});
+						  
+	third_sub.add(title);
+	third_sub.add(author);
+	third_sub.add(description);
+
+        third_entry.add(image);
+	third_entry.add(third_sub);
+
+        
+	featuredApps.add(first_entry);
+	featuredApps.add(second_entry);
+	featuredApps.add(third_entry);
+
+
+
+
+	
+/*
       // Featured Apps heading
       var featuredAppsHeader = new qx.ui.basic.Label();
       featuredAppsHeader.set(
@@ -190,7 +243,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       // add Featured Apps section to the top hbox
       hbox.add(featuredApps);
 
-
+*/
 
 
 
@@ -202,7 +255,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
 	//main_container.add(first_entry);
 	//main_container.add(second_entry); 
 	//main_container.add(third_entry);
-	main_container.add(hbox);
+	main_container.add(featuredApps);
 	scrollContainer.add(main_container, {flex: 1});
     },
 
@@ -241,11 +294,12 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
       // Dispatch to the appropriate handler, depending on the request type
       switch(requestType)
       {
-      case "getHomeRibbonData": 
+      /* case "getHomeRibbonData": 
         // Retrieve the app lists
         var featuredAppsList = response.data.result.Featured;
         
-        this.featuredAppsContainer.removeAll();
+        //FIXME: enable this 
+	this.featuredAppsContainer.removeAll();
         
 
         // Fill the featured apps ribbon with data
@@ -255,6 +309,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
           if (i > 0)
           {
             // ... then add a spacer between the previous one and this one
+	    // FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!
             this.featuredAppsContainer.add(new qx.ui.core.Spacer(10));
           }
 
@@ -262,11 +317,14 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
           var appFeatured = featuredAppsList[i];
           var appThumbFeatured = 
             new aiagallery.widget.SearchResult("featured", appFeatured);
+	    
+	  // FIXME!!!
           this.featuredAppsContainer.add(appThumbFeatured);
 
-          // Associate the app data with the UI widget so it can be passed
-          // in the click event callback
-          appThumbFeatured.setUserData("App Data", appFeatured);
+          
+
+	  //FIXME!!!!
+	  appThumbFeatured.setUserData("App Data", appFeatured);
           
           // Fire an event specific to this application, sans a friendly name.
           appThumbFeatured.addListener(
@@ -284,7 +342,7 @@ qx.Class.define("aiagallery.module.dgallery.featuredapps.Gui",
         this.featuredAppsContainer.setVisibility(
           featuredAppsList.length == 0 ? "excluded" : "visible");
        
-        break;
+        break; */
       default:
         throw new Error("Unexpected request type: " + requestType);
       }
