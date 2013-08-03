@@ -74,7 +74,7 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 
           // Obtain the first app (if there is one) to see if it's our one and
           // only new app editor
-          children = this.scrollCanvas.getChildren();
+          children = appCanvas.getChildren();
           if (children.length != 0 && children[0].getUid() === null)
           {
             // Found an existing new app editor. Retrieve it.
@@ -97,7 +97,7 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
           }
 
           // Scroll the app editor into view
-          this.scrollCanvas.addAt(app, 0);
+          this.appCanvas.addAt(app, 0);
 
           // Be sure it's open
           app.setValue(true);
@@ -213,25 +213,45 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       
       // The scroll container can only have a single widget as its content, so
       // create a scroll canvas to which we'll add each of the apps.
+
+
+
       this.scrollCanvas =
-        new qx.ui.container.Composite(new qx.ui.layout.VBox());
+        new qx.ui.container.Composite(new qx.ui.layout.HBox());
       o.add(this.scrollCanvas);
-      
+
+	
+      appCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox());
+      viewCanvas = new qx.ui.container.Composite(new qx.ui.layout.VBox()); 
+      this.scrollCanvas.add(appCanvas);
+      this.scrollCanvas.add(viewCanvas);
+
+     
+
+
+
+
       // Make the header visible or not depending on whether there are any
       // applications in the scroll canvas.
       function setHeaderVisibility(e)
       {
-        header.setVisibility(this.scrollCanvas.getChildren().length > 0
+        header.setVisibility(appCanvas.getChildren().length > 0
                              ? "visible"
                              : "excluded");
       }
+      
+       
+	//FIXME
+	//function setViewAppVisibility(e) 
+	//{ 
+	//    viewapp
 
-      this.scrollCanvas.addListener(
+      appCanvas.addListener(
         "addChildWidget",
         setHeaderVisibility, 
         this);
 
-      this.scrollCanvas.addListener(
+      appCanvas.addListener(
         "removeChildWidget",
         setHeaderVisibility, 
         this);
@@ -280,7 +300,7 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       {
       case "getAppList":
         // Remove everything that's already in the scroll canvas
-        this.scrollCanvas.removeAll();
+        appCanvas.removeAll();
 
         // Save the category list in a known place, for later access
         this.getApplicationRoot().setUserData("categories",
@@ -365,7 +385,7 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
 	      app_title = app.getTitle();
 
               // Set a label for each app.
-     	    var label = new qx.ui.form.Button("My App");
+   	      var label = new qx.ui.form.Button("View " + app_title); 
 
 	    // Add properties to the label
 	    label.setUserData("app_uid", app_uid); 
@@ -375,8 +395,8 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
             // Add it to the scrolling canvas
 	    //var label = new qx.ui.basic.Label("Hello");
 	    //var label = new qx.ui.form.Button("My App");
-            this.scrollCanvas.add(app);
-            this.scrollCanvas.add(label);
+            appCanvas.add(app);
+            viewCanvas.add(label);
 
             // Leave the app in the closed state
             app.setValue(false);
