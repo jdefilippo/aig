@@ -389,16 +389,22 @@ function setViewAppVisibility(e)
 	    var app_title; 
 	    app_title = app.getTitle();
 
-            // Set a label for each app.
-   	    var label = new qx.ui.form.Button("View " + app_title); 
+	    var app_string = "View " + app_title;
+	    
 
+	    app_font = qx.theme.manager.Font.getInstance().resolve("bold").clone();
+	    app_font.setSize(23);
+
+            // Set a label for each app.
+   	    var app_label = new qx.ui.form.Button(app_string); 
+	    app_label.setFont(app_font);
 	    // Add properties to the label
-	    label.setUserData("app_uid", app_uid); 
-	    label.setUserData("app_title", app_title);
-	    this.addAppLink(label); 
+	    app_label.setUserData("app_uid", app_uid); 
+	    app_label.setUserData("app_title", app_title);
+	    this.addAppLink(app_label); 
 	            
             
-
+	   
 
 
 	    function setViewAppVisibility(e) 
@@ -409,7 +415,7 @@ function setViewAppVisibility(e)
 
 	    // Add it to the scrolling canvas
             appCanvas.add(app);     
-	    viewCanvas.add(label);
+	    viewCanvas.add(app_label);
 
 
 
