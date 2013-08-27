@@ -603,6 +603,15 @@ qx.Class.define("aiagallery.widget.mystuff.Detail",
 
     this.addListener("deleteApp", this.__fsm.eventListener, this.__fsm);
 
+    // Create a View App button which linked to the app homepage.
+    o = new qx.ui.form.Button(this.tr("View App"));
+    o.set(
+    {
+        tabIndex : 14,
+        width    : 130
+    });
+    form.addButton(o); 
+
     // Create the rendered form and add it to the HBox
     formRendered = new aiagallery.widget.mystuff.DetailRenderer(form);
     hBox.add(formRendered);
