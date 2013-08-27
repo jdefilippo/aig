@@ -610,7 +610,34 @@ qx.Class.define("aiagallery.widget.mystuff.Detail",
         tabIndex : 14,
         width    : 130
     });
+    
+
+    var app_uid = "48002";
+    var app_title = "Some other app";
+    o.setUserData("app_uid", app_uid);
+    o.setUserData("app_title", app_title);
+
+    o.addListener(
+    "execute",
+    function(e)
+    {
+        var query;
+        var app_uid;
+        var app_title;
+        // Prevent the default 'click' behavior
+        //e.preventDefault();
+        //e.stop();
+
+        app_uid = e.getTarget().getUserData("app_uid");
+        app_title = e.getTarget().getUserData("app_title");
+
+        // Launch app page module
+        aiagallery.module.dgallery.appinfo.AppInfo.addAppView(app_uid, app_title);    
+    },
+    this);
+
     form.addButton(o); 
+    this.butViewApp = o;
 
     // Create the rendered form and add it to the HBox
     formRendered = new aiagallery.widget.mystuff.DetailRenderer(form);
