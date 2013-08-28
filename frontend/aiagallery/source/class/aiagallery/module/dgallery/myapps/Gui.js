@@ -354,8 +354,25 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
             // Set this app's data
             app.set(usefulAppData);
             
+            // Grab unique identifier for the app
+            var app_uid;
+            app_uid = app.getUid();
+
+            // Grab title for the app
+            var app_title;
+            app_title = app.getTitle();
+
+            // Create a button for each app.
+            var myapp_button = new qx.ui.form.Button("My App");
+
+            // Add properties to the button using the setUserData method
+            myapp_button.setUserData("app_uid", app_uid);
+            myapp_button.setUserData("app_title", app_title);
+            this.addAppLink(myapp_button);
+
             // Add it to the scrolling canvas
             this.scrollCanvas.add(app);
+            this.scrollCanvas.add(myapp_button);
 
             // Leave the app in the closed state
             app.setValue(false);
@@ -421,6 +438,33 @@ qx.Class.define("aiagallery.module.dgallery.myapps.Gui",
       default:
         throw new Error("Unexpected request type: " + requestType);
       }
+    },
+
+ 
+    /** Add a link to the user profile*/
+    addAppLink : function(label)
+    {
+      label.setCursor("pointer");
+
+      label.addListener(
+        "click",
+        function(e)
+        {
+          var app_uid;
+          var app_title;
+
+          app_uid = e.getTarget().getUserData("app_uid");
+          app_title = e.getTarget().getUserData("app_title");
+
+          // Launch app page module
+          aiagallery.module.dgallery.appinfo.AppInfo.addAppView(app_uid, app_title);
+  
+        });
+
     }
+
+
+
+
   }
 });
